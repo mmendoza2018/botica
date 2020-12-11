@@ -21,12 +21,12 @@ require("vistas/componentes/header.html");
 <input type="text" id="usuario" class="form-control mb-4" placeholder="Usuario">
 
 <!-- Password -->
-<input type="password" id="pass" class="form-control mb-4" placeholder="Contrasena">
+<input type="password" id="pass" class="form-control mb-4" placeholder="Contraseña">
 
 
 
 <!-- Sign in button -->
-<button class="btn btn-success btn-block my-4" onclick="enviar()" >ingresar</button>
+<button class="btn btn-success btn-block my-4" type="button" onclick="enviar()" >ingresar</button>
 
 <!-- Register -->
 </form>
@@ -38,31 +38,7 @@ require("vistas/componentes/header.html");
 </div>
 <?php require("vistas/componentes/footer.html") ?>
 
-  <script>
-const enviar = () =>{
-  user = $("#usuario").val();
- pass = $("#pass").val();
-
- let val=(/[!$%&/?¡'¨*¿:_;]/gi).test(user);
- if(user==="" || pass===""){
-return alert( "campos vacios");
- } else if(val===true){
- return alert("no se aceptan caracteres especiales");
-
-} 
-let datos="user="+user +"&pass="+pass;
-$.ajax({
-  type: "POST",
-  url: "procesos/login.php",
-  data: datos,
-  success: function (response) {
-    alert(response);
-    
-  }
-});
-}
-
-  </script>
+  
 
 </body>
 </html>
