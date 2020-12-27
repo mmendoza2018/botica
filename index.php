@@ -12,23 +12,22 @@ require("vistas/componentes/header.html");
   <div class="col-sm-4"></div>
   <div class="col-sm-4 pt-5">
     <!-- Default form login -->
-<form class="text-center border border-light p-5 form_fondo" >
-
-<img src="img/logo.jpeg" class="img-fluid" alt="Responsive image">
+    <form action="/action_page.php" class="was-validated text-center border border-light p-5 form_fondo">
+    <img src="img/logo.jpeg" class="img-fluid" alt="Responsive image">
 <hr>
-
-<!-- Email -->
-<input type="text" id="usuario" class="form-control mb-4" placeholder="Usuario">
-
-<!-- Password -->
-<input type="password" id="pass" class="form-control mb-4" placeholder="Contraseña">
-
-
-
-<!-- Sign in button -->
-<button class="btn btn-success btn-block my-4" type="button" onclick="enviar()" >ingresar</button>
-
-<!-- Register -->
+    
+  <div class="form-group">
+    <input type="text" class="form-control" id="usuario" placeholder="usuario" name="uname" required>
+    <div class="valid-feedback"></div>
+    <div class="invalid-feedback"></div>
+  </div>
+  <div class="form-group">
+    <input type="password" class="form-control" id="pass" placeholder="contraseña" name="pswd" required>
+    <div class="valid-feedback"></div>
+    <div class="invalid-feedback"></div>
+  </div>
+  
+  <button type="button" class="btn btn-success form-control py-2" onclick="enviar()">Ingresar</button>
 </form>
 <!-- Default form login -->
   </div>

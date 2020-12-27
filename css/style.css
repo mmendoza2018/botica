@@ -1,5 +1,6 @@
 body, html {
     height: 100%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
 .bg { 
     /* The image used */
@@ -15,5 +16,8 @@ body, html {
   }
   .form_fondo{
     background-color:#fff;
+  }
+  .modal{
+   
   }
   

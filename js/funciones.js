@@ -6,7 +6,7 @@ const enviar = () => {
    if(user==="" || pass===""){
   return   Swal.fire({
     icon: 'error',
-    title: 'por favor ingrese los camps obligatorios'
+    title: 'por favor ingrese los campos obligatorios'
   })
    } else if(val===true){
    return  Swal.fire({
@@ -18,7 +18,7 @@ const enviar = () => {
   let datos="user="+user +"&pass="+pass;
   $.ajax({
     type: "POST",
-    url: "procesos/login.php",
+    url: "php/procesos/login.php",
     data: datos,
     success: function (respuesta) {
       
