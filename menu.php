@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (isset($_SESSION["id_usuario"])){ 
+  
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php 
@@ -24,14 +30,14 @@ require("vistas/componentes/header.html");
       <li class="nav-item avatar dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" width="40" height="40" class="rounded-circle z-depth-0"
+          <img src="https://i.pinimg.com/736x/49/c8/e4/49c8e403cd1929e9e7b02126824ff831.jpg" width="40" height="40" class="rounded-circle z-depth-0"
             alt="avatar image">
         </a>
         <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
           aria-labelledby="navbarDropdownMenuLink-55">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="php/procesos/session_destroy.php"><i class="fas fa-window-close red-text"></i> Cerrar Sesion</a>
+          <a class="dropdown-item" href="#">mi perfil</a>
+          <a class="dropdown-item" href="#">mas..</a>
         </div>
       </li>
     </ul>
@@ -123,10 +129,9 @@ require("vistas/componentes/header.html");
     <input type="number" id="numero_p" class="form-control" placeholder="Numero de Telefono">
 </div>
 <!-- Tipo de Documento -->
-<span>Tipo de Documento</span>
-<select class="mdb-select">
-    <option value="" disabled>Choose option</option>
-    <option value="1" selected>DNI</option>
+<select class="mdb-select form-control">
+    <option value="" selected disabled>tipo documento</option>
+    <option value="1" >DNI</option>
     <option value="2">CEDULA</option>
     <option value="3">RUC</option>
     
@@ -183,9 +188,9 @@ require("vistas/componentes/header.html");
             <div class="col-md-6 mb-3">
                     <select type="text" class="form-control validar_usuario_ag"  name="tipo_usu_ag">
                     <option>rol</option>
-                      <option>Dueño</option>
-                      <option>Administrador</option>
-                      <option>Vendedor</option>
+                      <option value="Dueño">Dueño</option>
+                      <option value="administrador">Administrador</option>
+                      <option value="Vendedor">Vendedor</option>
                     </select>
                 </div>
                 </div>
@@ -326,18 +331,18 @@ require("vistas/componentes/header.html");
     <input type="number" id="numerodoc_pro" class="form-control" placeholder=""value="" name="numerod">
 </div>
 <div class="form-outline">
-        <label class="form-label" for="form1">estado </label>
+        <label class="form-label"  for="form1">estado </label>
         <select class="mdb-select form-control" id="estado_pro">
-    <option value="1" disabled>Activo</option>
-    <option value="0" selected>Inactivo</option>
+    <option value="1" >Activo</option>
+    <option value="0" >Inactivo</option>
   
     
 </select>
 </div>
 </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="actualizar" class="btn btn-info btn-sm">Actualizar</button>
       </div>
     </div>
   </div>
@@ -381,7 +386,7 @@ const agregar_usuario = () => {
   showConfirmButton: false,
   timer: 1500
 })
-
+$("#form_agrega_usuario")[0].reset();
 $("#llega_tabla_usuario").load("php/procesos/usuario/vista_tabla.php");
       }
 
@@ -400,22 +405,7 @@ const agregar_proveedor = () =>{
  numero_d = $("#numero_d").val();
  alert(nombre_p)
  
-  
- /* let val=(/[!$%&/?¡'¨*¿:_;]/gi).test(nombre_p);
-  if(nombre_p==="" || direccion_p==="" || numero_p==="" || numero_d===""){
- //return alert( "campos vacios");
- return   Swal.fire({
-     icon: 'error',
-     title: 'por favor ingrese los campos obligatorios'
-   })
-  } else if(val===true){
-  //return alert("no se aceptan caracteres especiales");
-  return  Swal.fire({
-     icon: 'error',
-     title: 'por favor ingrese caracteres validos'
-   })
- 
- } */
+
  let datos="nombre_p="+nombre_p +"&direccion_p="+direccion_p +"&numero_p="+numero_p +"&numero_d="+numero_d;
  $.ajax({
    type: "POST",
@@ -502,7 +492,6 @@ const llenar_usuario = (d) => {
   $("#id_usu_ac").val(x[4])
   
 };
- 
 </script>
 
 <script>
@@ -530,5 +519,66 @@ $(document).ready(function () {
   $("#llega_tabla_proveedor").load("php/procesos/proveedor/vista_tabla.php")
 });
 </script>
-</body>
+
+<script>
+$('#actualizar').click(function(){
+        id=$("#id_pro").val();
+        nombre=$("#nombre_pro").val();
+        dir=$("#direccion_pro").val();
+        telf=$("#telefono_pro").val();
+        tipo_doc=$("#tipodoc_pro").val();
+        num=$("#numerodoc_pro").val();
+        estado=$("#estado_pro").val();
+      
+      // id_pro,nombre_pro,direccion_pro,telefono_pro,tipodoc_pro,numerodoc_pro,estado_pro
+
+        var ruta= "id="+id+
+                  "&nombre="+nombre+
+                  "&dir="+dir+
+                  "&telf="+telf+
+                  "&tipo_doc="+tipo_doc+
+                  "&num="+num+
+                  "&estado="+estado;
+        $.ajax({
+  type: "POST",
+  url: "php/procesos/proveedor/actualiza_proveedor.php",
+  data: ruta,
+  success: function (callese) {
+    //alerttify.correcto(response);
+   if(callese==="1"){
+    Swal.fire({
+  position: 'center',
+  icon: 'success',
+  title: 'Actualizado correctamente !',
+  showConfirmButton: false,
+  timer: 1500
+})
+$("#llega_tabla_proveedor").load("php/procesos/proveedor/vista_tabla.php")
+   }
+   else{
+    Swal.fire({
+  position: 'center',
+  icon: 'error',
+  title: 'hubo un error  !',
+  showConfirmButton: false,
+  timer: 1500
+})
+
+   }
+    
+  }
+
+    });
+});
+</script>
+
+
 </html>
+</body>
+<?php
+}
+else{
+ // echo "no eres bienbenido shu";
+  header("Location: index.php");
+}
+?>

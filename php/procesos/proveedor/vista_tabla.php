@@ -1,4 +1,4 @@
-<div class="table table-hover table-responsive jumbotron p-0 ">
+<div class="table table-hover table-responsive jumbotron p-0 m-0">
   
   <!--contenedor2-->
   <div class="card "><!--esta es un card-->
@@ -6,11 +6,10 @@
 include("../conexion.php");
   
   ?>
-  <div class="table-responsive p-2 ">
+  <div class="table-responsive p-0 ">
                       <table id="dttable_proveedores" class="table table-striped table-bordered w-100 ">
                           <thead class="amber lighten-3">
                           <tr>
-              <td class="th-sm">id</td>
               <td class="th-sm">nombre</td>
               <td class="th-sm">telefono</td>
               <td class="th-sm">direccion</td>
@@ -30,9 +29,7 @@ include("../conexion.php");
         $datos_prov=$mostrar["id_pro"]."|".$mostrar["nombre_pro"]."|".$mostrar["telefono_pro"]."|".$mostrar["direccion_pro"]."|".$mostrar["numerodoc_pro"]."|".$mostrar["tipodoc_pro"]."|".$mostrar["estado_pro"]; 
       // id_pro,nombre_pro,telefono_pro,direccion_pro,numerodoc_pro,tipodoc_pro,estado_pro
            ?>
- 
           <tr>
-              <td><?php echo $mostrar['id_pro'] ?></td>
               <td><?php echo $mostrar['nombre_pro'] ?></td>
               <td><?php echo $mostrar['telefono_pro'] ?></td>
               <td><?php echo $mostrar['direccion_pro'] ?></td>
@@ -40,8 +37,8 @@ include("../conexion.php");
               <td><?php echo $mostrar['numerodoc_pro'] ?></td>
               <td><?php echo $mostrar['estado_pro'] ?></td>
               <td> 
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicExampleModal2" onclick="llenar_prov('<?php echo $datos_prov  ?>')">
-  Launch demo modal
+              <button type="button" class="btn btn-info p-1" data-toggle="modal" data-target="#basicExampleModal2" onclick="llenar_prov('<?php echo $datos_prov  ?>')">
+              <i class="fas fa-user-edit"></i>
 </button>  
               </td>
           </tr>

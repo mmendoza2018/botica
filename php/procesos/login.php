@@ -4,6 +4,7 @@ include "conexion.php";
 $usuario = $_POST['user'];
 $password = $_POST['pass'];
 $password_2="";
+$id_u=0;
 
 
 //$busqueda_1 = $mysqli -> query ("SELECT * FROM usuarios WHERE id_u = '$usuario'"); //para ver si existe el usuario
@@ -18,11 +19,13 @@ if ($filas>0) {
     foreach ($res as $r) {
         $password_2=$r["contra_u"];
         $nombre=$r["nombre_u"];
+        $id=$r["id_u"];
     }
   
 if (password_verify($password,$password_2)) {// el metodo recibe dos parametros la que llega del form y la de la base de datos 
     echo 1; // hay similitud con las contraseñas devuelve 1 al js 
     $_SESSION["nom_usuario"]=$nombre;// creamos una session 
+    $_SESSION["id_usuario"]=$id;
     
 }else{
  echo 2;

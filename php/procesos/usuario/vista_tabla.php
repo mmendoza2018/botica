@@ -5,7 +5,7 @@
                         <th >Telefono</th>
                         <th >Direccion</th>
                         <th >rol</th>
-                        <th >opcion</th>
+                        <th >editar</th>
                         
                     </tr>
                 </thead>
