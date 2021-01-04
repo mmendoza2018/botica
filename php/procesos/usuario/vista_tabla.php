@@ -4,22 +4,23 @@
                         <th >Nombres </th>
                         <th >Telefono</th>
                         <th >Direccion</th>
-                        <th >rol</th>
+                        <th >tipo usuario</th>
                         <th >editar</th>
-                        
+
                     </tr>
                 </thead>
                 <tbody>
-                   
-                   <?php 
-                   include("../conexion.php");
 
-                  $usuario_con="SELECT * FROM usuarios ";
+                   <?php
+                   include("../conexion.php");
+               
+
+                  $usuario_con="SELECT * FROM usuarios WHERE estado_u=1";
                   $res_usu=mysqli_query($mysqli,$usuario_con);
-                  foreach ($res_usu as $row) { 
-                    $datos_usuario=$row["nombre_u"]."|".$row["telefono_u"]."|".$row["direccion_u"]."|".$row["tipo_u"]."|".$row["id_u"];
+                  foreach ($res_usu as $row) {
+                    $datos_usuario=$row["nombre_u"]."|".$row["telefono_u"]."|".$row["direccion_u"]."|".$row["tipo_u"]."|".$row["id_u"]."|".$row["estado_u"];
                     ?>
-                   
+
                         <tr>
                           <td><?php  echo $row["nombre_u"] ?></td>
                           <td><?php  echo $row["telefono_u"] ?></td>
@@ -31,11 +32,11 @@
                   }
 
                    ?>
-                   
+
 
 
                 </tbody>
-              
+
             </table>
             <script type="text/javascript">
 			$(document).ready(function() {
